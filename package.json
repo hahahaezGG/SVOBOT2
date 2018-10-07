@@ -1,0 +1,28 @@
+{
+  "name": "ClawBot",
+  "version": "0.0.1",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "test": "node bot.js"
+  },
+  "author": "DRclaw",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "cheerio": "^1.0.0-rc.2",
+    "discord.js": "^11.3.2",
+    "discord.js-commando": "^0.10.0",
+    "fortnite": "^3.0.1",
+    "g-image-search": "^1.0.2",
+    "got": "^8.3.0",
+    "isgd": "^1.1.3",
+    "moment": "^2.22.2",
+    "moment-duration-format": "^1.3.0",
+    "ms": "^2.0.0",
+    "sqlite": "^3.0.0",
+    "superagent": "^3.8.2",
+    "weather-js": "^2.0.0",
+    "ytdl-core": "^0.26.1"
+  }
+}
