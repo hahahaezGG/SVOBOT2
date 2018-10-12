@@ -67,7 +67,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: 'altın',
+  name: 'altınlar',
   description: 'Altınları gösterir.',
-  usage: 'altın'
+  usage: 'altınlar'
 };
