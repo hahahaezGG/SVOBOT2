@@ -31,8 +31,6 @@ exports.run = (client, message) => {
     message.guild.member(user).addRole(muteRole).then(() => {
       guild.channels.get(modlog.id).sendEmbed(embed).catch(console.error);
     });
-	  
-};
 
 exports.conf = {
   enabled: true,
