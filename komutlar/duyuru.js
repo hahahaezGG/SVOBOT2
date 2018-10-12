@@ -20,7 +20,6 @@ exports.run = (client, message) => {
     .setColor(0x00AE86)
     .setAuthor(message.author.username, message.author.avatarURL)
   .addField("**VIP Satin Aldiniz**", )
-    return message.author.sendEmbed(pingozel)
 
   if (message.guild.member(user).roles.has(muteRole.id)) {
     message.guild.member(user).removeRole(muteRole).then(() => {
