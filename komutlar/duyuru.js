@@ -1,10 +1,9 @@
-  let user = message.mentions.users.first();
-  let modlog = guild.channels.find('name', 'log');
-  let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'VIP');
-  if (!modlog) return message.reply('`log` **kanalını bulamıyorum.**').catch(console.error);
-  if (!muteRole) return message.reply('`VIP` **adlı bir rol bulamıyorum.**').catch(console.error);
-  if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('Gerekli izinlere sahip değilim.').catch(console.error);
-
+let user = message.mentions.users.first();
+let modlog = guild.channels.find('name', 'log');
+let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'VIP');
+if (!modlog) return message.reply('`log` **kanalını bulamıyorum.**').catch(console.error);
+if (!muteRole) return message.reply('`VIP` **adlı bir rol bulamıyorum.**').catch(console.error);
+if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('Gerekli izinlere sahip değilim.').catch(console.error);
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const ayarlar = require('../ayarlar.json');
