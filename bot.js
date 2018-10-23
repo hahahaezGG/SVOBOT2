@@ -5,9 +5,6 @@ const ayarlar = require('./ayarlar.json');
 const chalk = require('chalk');
 const fs = require('fs');
 const moment = require('moment');
-const ytdl = require('ytdl-core');
-
-
 require('./util/eventLoader')(client);
 
 var prefix = ayarlar.prefix;
@@ -17,74 +14,9 @@ const log = message => {
 };
 
 client.on("ready", () => {
-  client.user.setGame(prefix + "yardım | SVO | 7-24 ") 
+  client.user.setGame(prefix + "yardım | SVO | 7-24") 
   console.log("Bağlandım!")   
 });
-
-const connections = new Map();
-let broadcast;
-
-client.on('message', m => {
-  if (!m.guild) return;
-  if (m.content.startsWith('-gir')) {
-    const channel = m.guild.channels.get(m.content.split(' ')[1]) || m.member.voiceChannel;
-    if (channel && channel.type === 'voice') {
-      channel.join().then(conn => {
-        conn.player.on('error', (...e) => console.log('player', ...e));
-        if (!connections.has(m.guild.id)) connections.set(m.guild.id, { conn, queue: [] });
-        m.reply('tamamdır!');
-      });
-    } else {
-      m.reply('Lütfen bir sesli kanala giriniz!');
-    }
-  } else if (m.content.startsWith('-çal')) {
-    if (connections.has(m.guild.id)) {
-      const connData = connections.get(m.guild.id);
-      const queue = connData.queue;
-      const url = m.content.split(' ').slice(1).join(' ')
-        .replace(/</g, '')
-        .replace(/>/g, '');
-      queue.push({ url, m });
-      if (queue.length > 1) {
-        m.reply(`İstediğiniz müzik ${queue.length - 1} adet müzikten sonra çalacak`);
-        return;
-      }
-      doQueue(connData);
-    }
-  } else if (m.content.startsWith('-geç')) {
-    if (connections.has(m.guild.id)) {
-      const connData = connections.get(m.guild.id);
-      if (connData.dispatcher) {
-        connData.dispatcher.end();
-      }
-    }
-  } else if (m.content.startsWith('-kuyruk')) {
-    if (connections.has(m.guild.id)) {
-      const connData = connections.get(m.guild.id);
-      const queue = connData.queue;
-      m.reply(queue.map(q => q.url));
-    }
-  }
-});
-
-function doQueue(connData) {
-  const conn = connData.conn;
-  const queue = connData.queue;
-  const item = queue[0];
-  if (!item) return;
-  const stream = ytdl(item.url, { filter: 'audioonly' }, { passes: 3 });
-  const dispatcher = conn.playStream(stream);
-  stream.on('info', info => {
-    item.m.reply(`Çalınan: **${info.title}**`);
-  });
-  dispatcher.on('end', () => {
-    queue.shift();
-    doQueue(connData);
-  });
-  dispatcher.on('error', (...e) => console.log('dispatcher', ...e));
-  connData.dispatcher = dispatcher;
-}
-
 
 bot.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'hosgeldiniz-log');
@@ -97,7 +29,7 @@ bot.on('guildMemberAdd', member => {
   .setColor(3447003)
   .setTimestamp()
   .setDescription('')
-  .setImage(``)
+  .setImage(`http://clawbot.tk/img/hg.png`)
   return message.channel.sendEmbed(sunucubilgi);
 });
 
@@ -168,15 +100,15 @@ client.unload = command => {
 };
 
 client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'sa') {
-    msg.channel.send('Aleykum Selam');
+  if (msg.content.toLowerCase() === 'sa', 'Sa', 'SA', 'sA') {
+    msg.channel.send('Aleyküm Selam,  Hoş Geldin');
   }
 });
 
 client.elevation = message => {
   if(!message.guild) {
 	return; }
-  let permlvl = 2;
+  let permlvl = 0;
   if (message.member.hasPermission("BAN_MEMBERS")) permlvl = 2;
   if (message.member.hasPermission("ADMINISTRATOR")) permlvl = 3;
   if (message.author.id === ayarlar.sahip) permlvl = 4;
